@@ -39,7 +39,13 @@ export const homeServices = [
     image: '/assets/denting-and-painting.png',
     inclusions: ['Panel prep + filling', 'Color matching', 'Baked clear coat', 'Insurance-friendly estimates', 'Post-paint polish'],
   },
-  
+  {
+    title: 'Full Body Painting',
+    desc: 'Complete respray with matched primer, base, and deep clear for a factory reset.',
+    icon: <RiPaintFill className="text-text" />,
+    image: '/assets/full-body-painting.jpeg',
+    inclusions: ['Surface prep + masking', 'Color-match mixing', 'Primer + base + clear', 'Baked finish', 'Final polish & inspection'],
+  },
 ]
 
 export const servicesPageServices = [
@@ -48,43 +54,43 @@ export const servicesPageServices = [
     title: 'Car Wash',
     desc: 'Two-bucket wash, foam pre-soak, and microfiber dry.',
     icon: <RiCarFill className="text-text" />,
-    image: 'https://images.pexels.com/photos/1552650/pexels-photo-1552650.jpeg?auto=compress&cs=tinysrgb&w=1600&h=1000&fit=crop',
+    image: '/assets/car-wash.jpeg',
     inclusions: ['pH-balanced shampoo', 'Wheel + tire clean', 'Microfiber dry', 'Streak-free glass', 'Quick interior tidy'],
   },
   {
     title: 'Car Body Cover',
     desc: 'Breathable, paint-safe covers for indoor/outdoor storage.',
     icon: <RiShieldStarFill className="text-text" />,
-    image: 'https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&cs=tinysrgb&w=1600&h=1000&fit=crop',
+    image: '/assets/car-cover-service.jpeg',
     inclusions: ['Custom sizing', 'Soft liner', 'UV + dust protection', 'Tie-downs', 'Logo placement'],
   },
   {
     title: 'Mats',
     desc: '3D mats, lamination, and easy-clean floor protection.',
     icon: <RiBrushFill className="text-text" />,
-    image: 'https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?auto=compress&cs=tinysrgb&w=1600&h=1000&fit=crop',
+    image: '/assets/mat.jpeg',
     inclusions: ['3D tray fitment', 'Odor-free materials', 'Stain-resistant', 'Heel pad options', 'Fast install'],
   },
   {
     title: 'Accessories',
     desc: 'From ambient lighting to dash cams, fitted cleanly.',
     icon: <RiSparkling2Fill className="text-text" />,
-    image: 'https://images.pexels.com/photos/799443/pexels-photo-799443.jpeg?auto=compress&cs=tinysrgb&w=1600&h=1000&fit=crop',
+    image: '/assets/accessories.jpeg',
     inclusions: ['Ambient + footwell lights', 'Dash cams', 'Phone mounts', 'Wire tuck + fuse tap', 'OEM-look finish'],
   },
   {
     title: 'Sun Control Films',
     desc: 'Heat rejection tints installed with clean edges.',
     icon: <RiShieldStarFill className="text-text" />,
-    image: 'https://images.pexels.com/photos/687311/pexels-photo-687311.jpeg?auto=compress&cs=tinysrgb&w=1600&h=1000&fit=crop',
+    image: '/assets/sun-control-film.jpeg',
     inclusions: ['Heat + UV rejection', 'Edge-to-edge install', 'Rear screen seamless', 'Multiple VLT options', 'Warranty backed'],
   },
 ]
 
 export const trustBar = [
-  { label: '4.9/5 rating', detail: 'Across 1.2k+ owner reviews' },
-  { label: '2,400+ cars', detail: 'Supercars, classics, fleets' },
-  { label: '10-yr PPF warranty', detail: 'Registered & transferable' },
+  { label: '4.9/5 rating', detail: 'Across 5k+ owner reviews' },
+  { label: '20,000+', detail: 'Happy Customers' },
+  { label: '5-yr PPF warranty', detail: 'Registered & transferable' },
   { label: 'Certified installers', detail: 'Film + coating accredited' },
 ]
 
@@ -136,14 +142,43 @@ export const transformations = [
 export const brands = ['Xpel / SunTek films', 'Gyeon / Gtechniq coatings', 'Koch-Chemie prep', 'Swissvax interiors', '3M Pro tools']
 
 export const faqs = [
-  { q: 'How long does a full-body PPF take?', a: 'Typically 2-3 days including prep, edge wrapping, and curing.' },
-  { q: 'Do you offer maintenance plans?', a: 'Yes, quarterly maintenance for coated/PPF cars with discounted decon and top-ups.' },
-  { q: 'Can you work with classics?', a: 'We mask delicate trims, use low-tack tapes, and avoid aggressive heat on vintage panels.' },
+  {
+    q: 'What services do you offer?',
+    a: 'Professional car care and detailing: premium wash, interior cleaning, ceramic/graphene coating, paint protection, scratch removal, alloy & tyre care, headlight restoration, and interior accessories. (Services vary by vehicle and package.)',
+  },
+  {
+    q: 'How do I book a service?',
+    a: 'Call or WhatsApp us, submit the website enquiry form, or visit our workshop. We’ll confirm and schedule quickly.',
+  },
+  {
+    q: 'Do you provide warranties?',
+    a: 'Yes. Warranty depends on the service or product (e.g., coatings, accessories). Terms are explained upfront—no surprises.',
+  },
+  {
+    q: 'What payment methods are accepted?',
+    a: 'Cash, UPI, debit/credit cards, and bank transfer.',
+  },
+  {
+    q: 'Can I reschedule or cancel?',
+    a: 'Yes. Please inform us at least 24 hours in advance.',
+  },
+  {
+    q: 'Do you offer discounts?',
+    a: 'Occasional offers on select services. Check with us or our social pages for current deals.',
+  },
+  {
+    q: 'Can you match my car’s paint color?',
+    a: 'Yes. We use manufacturer codes and shade matching. Minor variations can occur due to aging or sun exposure, but the finish is visually seamless.',
+  },
+  {
+    q: 'Can services be customized?',
+    a: 'Yes. We tailor services to your car’s condition, usage, and budget—no unnecessary upselling.',
+  },
 ]
 
 export const social = [
-  { platform: 'Instagram', handle: '@mayurautoworld', icon: <RiInstagramFill />, link: '#' },
-  { platform: 'YouTube', handle: 'Build diaries & walkthroughs', icon: <RiYoutubeFill />, link: '#' },
+  { platform: 'Instagram', handle: '@mayur_autoworld', icon: <RiInstagramFill />, link: 'https://www.instagram.com/mayur_autoworld' },
+  { platform: 'YouTube', handle: 'Build diaries & walkthroughs', icon: <RiYoutubeFill />, link: 'https://youtube.com/@mayurautoworld' },
 ]
 
 export const beforeAfter = {

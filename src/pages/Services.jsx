@@ -31,11 +31,6 @@ export default function ServicesPage() {
           ))}
         </div>
       </section>
-      <div className={`${container} pb-12`}>
-        <MagneticButton className="rounded-full border border-accent text-text px-5 py-3 font-semibold hover:bg-accent/10 transition-colors">
-          Book a service
-        </MagneticButton>
-      </div>
     </main>
   )
 }

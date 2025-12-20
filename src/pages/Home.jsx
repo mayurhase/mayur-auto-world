@@ -8,6 +8,7 @@ import {
   RiWhatsappFill,
   RiPhoneFill,
   RiCheckFill,
+  RiArrowDownSLine,
 } from "react-icons/ri";
 import SectionTitle from "../components/SectionTitle";
 import MagneticButton from "../components/MagneticButton";
@@ -30,6 +31,8 @@ export default function HomePage() {
   const [galleryFilter, setGalleryFilter] = useState("All");
   const [selectedService, setSelectedService] = useState(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [openFaqs, setOpenFaqs] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   const filteredGallery = useMemo(
     () =>
@@ -51,9 +54,12 @@ export default function HomePage() {
   const safetySlides = useMemo(
     () => [
       { label: "All services", image: "/assets/all-services.jpeg" },
-      { label: "Don’t drink and drive", image: "/assets/dont-drink-drive.jpeg" },
       { label: "Use seatbelt", image: "/assets/use-seatbelt.jpeg" },
       { label: "Car cover", image: "/assets/car-cover.jpeg" },
+      {
+        label: "Don’t drink and drive",
+        image: "/assets/dont-drink-drive.jpeg",
+      },
     ],
     []
   );
@@ -65,8 +71,16 @@ export default function HomePage() {
       const scrolled = window.scrollY;
       setScrollProgress(Math.min(100, (scrolled / scrollable) * 100));
     };
+    const onResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    onResize();
     window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+    };
   }, []);
 
   useEffect(() => {
@@ -112,7 +126,7 @@ export default function HomePage() {
       </div>
 
       <section
-        className="relative min-h-screen flex items-center py-20 overflow-hidden"
+        className="relative min-h-screen flex items-center pt-16 pb-14 sm:py-20 overflow-hidden"
         style={{
           backgroundImage:
             "linear-gradient(180deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.68) 40%, rgba(0,0,0,0.4) 100%), url('/assets/hero-bg.jpeg')",
@@ -124,11 +138,14 @@ export default function HomePage() {
       >
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/70 via-transparent to-black/70" />
         <div className="relative w-full">
-          <div className={`${container} space-y-6`}>
+          <div className={`${container} space-y-4 sm:space-y-6`}>
             <motion.div
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
+              initial={isMobile ? false : "hidden"}
+              whileInView={isMobile ? undefined : "show"}
+              viewport={isMobile ? undefined : { once: true }}
+              transition={
+                isMobile ? undefined : { duration: 0.5, ease: "easeOut" }
+              }
               variants={fadeIn}
               className="max-w-2xl space-y-4"
             >
@@ -146,9 +163,12 @@ export default function HomePage() {
               </p>
             </motion.div>
             <motion.div
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
+              initial={isMobile ? false : "hidden"}
+              whileInView={isMobile ? undefined : "show"}
+              viewport={isMobile ? undefined : { once: true, amount: 0.2 }}
+              transition={
+                isMobile ? undefined : { duration: 0.5, ease: "easeOut" }
+              }
               variants={fadeIn}
               className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl"
             >
@@ -186,7 +206,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className={`${sectionRhythm[1]} border-b border-borderSubtle/60`}>
+      <section
+        className={`${sectionRhythm[1]} border-b border-borderSubtle/60`}
+      >
         <div className={`${container} relative`}>
           <div className="flex items-center justify-between gap-3 mb-4">
             <div>
@@ -216,7 +238,7 @@ export default function HomePage() {
             <Swiper
               modules={[Navigation, Autoplay]}
               navigation={{ prevEl: ".safety-prev", nextEl: ".safety-next" }}
-              autoplay={{ delay: 2800, disableOnInteraction: false }}
+              autoplay={{ delay: 2000, disableOnInteraction: false }}
               spaceBetween={16}
               slidesPerView={1.05}
               breakpoints={{
@@ -270,11 +292,11 @@ export default function HomePage() {
             <motion.button
               key={service.title}
               type="button"
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
+              initial={isMobile ? false : "hidden"}
+              whileInView={isMobile ? undefined : "show"}
+              viewport={isMobile ? undefined : { once: true, amount: 0.2 }}
               variants={fadeIn}
-              transition={{ delay: idx * 0.05 }}
+              transition={isMobile ? undefined : { delay: idx * 0.05 }}
               className="group relative overflow-hidden rounded-3xl border border-borderSubtle bg-soft/70 shadow-card text-left"
               onClick={() => setSelectedService(service)}
             >
@@ -330,7 +352,7 @@ export default function HomePage() {
                 <p className="text-text-muted">{item.work}</p>
               </div>
               <div className="p-5 pt-0">
-                <div className="relative rounded-2xl overflow-hidden border border-borderSubtle">
+                <div className="relative rounded-2xl overflow-hidden border border-borderSubtle compare-pan-x">
                   <ReactCompareImage
                     leftImage={item.before}
                     rightImage={item.after}
@@ -398,68 +420,48 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      {isLightboxOpen && filteredGallery.length > 0 && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center px-4">
-          <button
-            type="button"
-            onClick={() => setIsLightboxOpen(false)}
-            className="absolute top-4 right-4 h-10 w-10 rounded-full bg-white/10 text-text flex items-center justify-center hover:bg-white/20 transition"
-            aria-label="Close lightbox"
-          >
-            ✕
-          </button>
-          <button
-            type="button"
-            onClick={() =>
-              setLightboxIndex(
-                (lightboxIndex + filteredGallery.length - 1) %
-                  filteredGallery.length
-              )
-            }
-            className="absolute left-4 sm:left-10 h-10 w-10 rounded-full bg-white/10 text-text text-xl flex items-center justify-center hover:bg-white/20 transition"
-            aria-label="Previous image"
-          >
-            ‹
-          </button>
-          <div className="max-w-5xl w-full max-h-[80vh] rounded-2xl overflow-hidden border border-borderSubtle bg-primary/80 shadow-card">
-            <img
-              src={filteredGallery[lightboxIndex].src}
-              alt="Gallery large"
-              className="w-full h-full object-contain bg-black"
-            />
-          </div>
-          <button
-            type="button"
-            onClick={() =>
-              setLightboxIndex((lightboxIndex + 1) % filteredGallery.length)
-            }
-            className="absolute right-4 sm:right-10 h-10 w-10 rounded-full bg-white/10 text-text text-xl flex items-center justify-center hover:bg-white/20 transition"
-            aria-label="Next image"
-          >
-            ›
-          </button>
-        </div>
-      )}
-      </section>
-
-      <SectionTitle
-        eyebrow="Brands & credibility"
-        title="Trusted tools and materials"
-        tone="tight"
-      />
-      <section
-        className={`${sectionRhythm[1]} border-y border-borderSubtle/60`}
-      >
-        <div className={`${container} grid sm:grid-cols-5 gap-3`}>
-          {brands.map((brand) => (
-            <div
-              key={brand}
-              className="rounded-2xl border border-borderSubtle bg-soft/70 px-3 py-4 text-center text-sm text-text-muted hover:border-accent transition"
+        {isLightboxOpen && filteredGallery.length > 0 && (
+          <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center px-4">
+            <button
+              type="button"
+              onClick={() => setIsLightboxOpen(false)}
+              className="absolute top-4 right-4 h-10 w-10 rounded-full bg-white/10 text-text flex items-center justify-center hover:bg-white/20 transition"
+              aria-label="Close lightbox"
             >
-              {brand}
+              ✕
+            </button>
+            <button
+              type="button"
+              onClick={() =>
+                setLightboxIndex(
+                  (lightboxIndex + filteredGallery.length - 1) %
+                    filteredGallery.length
+                )
+              }
+              className="absolute left-4 sm:left-10 h-10 w-10 rounded-full bg-white/10 text-text text-xl flex items-center justify-center hover:bg-white/20 transition"
+              aria-label="Previous image"
+            >
+              ‹
+            </button>
+            <div className="max-w-5xl w-full max-h-[80vh] rounded-2xl overflow-hidden border border-borderSubtle bg-primary/80 shadow-card">
+              <img
+                src={filteredGallery[lightboxIndex].src}
+                alt="Gallery large"
+                className="w-full h-full object-contain bg-black"
+              />
             </div>
-          ))}
-        </div>
+            <button
+              type="button"
+              onClick={() =>
+                setLightboxIndex((lightboxIndex + 1) % filteredGallery.length)
+              }
+              className="absolute right-4 sm:right-10 h-10 w-10 rounded-full bg-white/10 text-text text-xl flex items-center justify-center hover:bg-white/20 transition"
+              aria-label="Next image"
+            >
+              ›
+            </button>
+          </div>
+        )}
       </section>
 
       <SectionTitle
@@ -468,7 +470,9 @@ export default function HomePage() {
         tone="wide"
       />
       <section className={`${sectionRhythm[0]}`}>
-        <div className={`${container} grid md:grid-cols-3 gap-4`}>
+        <div
+          className={`${container} columns-1 md:columns-2 gap-5 [column-fill:_balance]`}
+        >
           {faqs.map((item, idx) => (
             <motion.div
               key={item.q}
@@ -477,38 +481,39 @@ export default function HomePage() {
               viewport={{ once: true, amount: 0.3 }}
               variants={fadeIn}
               transition={{ delay: idx * 0.04 }}
-              className="rounded-2xl border border-borderSubtle bg-soft/70 p-5"
+              className="relative mb-5 break-inside-avoid overflow-hidden rounded-3xl border border-borderSubtle bg-soft/80 p-5 shadow-card"
             >
-              <p className="text-sm uppercase tracking-[0.2em] text-accent mb-2">
-                {item.q}
-              </p>
-              <p className="text-text-muted">{item.a}</p>
+              <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-accent/10 blur-2xl" />
+              <div className="absolute left-0 top-0 h-1 w-16 bg-accent" />
+              <button
+                type="button"
+                onClick={() =>
+                  setOpenFaqs((prev) =>
+                    prev.includes(idx)
+                      ? prev.filter((i) => i !== idx)
+                      : [...prev, idx]
+                  )
+                }
+                className="relative flex w-full items-center gap-3 text-left"
+              >
+                <div className="h-8 w-8 flex items-center justify-center rounded-full bg-accent/20 text-accent font-bold text-sm shrink-0">
+                  {(idx + 1).toString().padStart(2, "0")}
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm uppercase tracking-[0.16em] text-text">
+                    {item.q}
+                  </p>
+                </div>
+                <RiArrowDownSLine
+                  className={`text-accent transition-transform ${
+                    openFaqs.includes(idx) ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+              {openFaqs.includes(idx) && (
+                <p className="mt-3 text-text-muted leading-relaxed">{item.a}</p>
+              )}
             </motion.div>
-          ))}
-        </div>
-      </section>
-
-      <SectionTitle
-        eyebrow="Social"
-        title="See builds in motion"
-        tone="tight"
-      />
-      <section
-        className={`${sectionRhythm[1]} border-y border-borderSubtle/60`}
-      >
-        <div className={`${container} flex flex-wrap gap-3`}>
-          {social.map((item) => (
-            <a
-              key={item.platform}
-              href={item.link}
-              className="flex items-center gap-3 rounded-2xl border border-borderSubtle bg-soft/70 px-4 py-3 hover:border-accent transition"
-            >
-              <span className="text-accent text-lg">{item.icon}</span>
-              <div>
-                <p className="font-semibold">{item.platform}</p>
-                <p className="text-text-muted text-sm">{item.handle}</p>
-              </div>
-            </a>
           ))}
         </div>
       </section>
@@ -533,25 +538,11 @@ export default function HomePage() {
             <MagneticButton className="w-full rounded-full bg-accent text-primary py-3 font-semibold hover:bg-accentHover transition-colors">
               Submit enquiry
             </MagneticButton>
-            <div className="flex flex-wrap gap-2">
-              <a
-                href="https://wa.me/1234567890"
-                className="flex items-center gap-2 rounded-full border border-borderSubtle px-4 py-2 text-sm font-semibold hover:border-accent transition-colors"
-              >
-                <RiWhatsappFill /> WhatsApp
-              </a>
-              <a
-                href="tel:+911234567890"
-                className="flex items-center gap-2 rounded-full border border-borderSubtle px-4 py-2 text-sm font-semibold hover:border-accent transition-colors"
-              >
-                <RiPhoneFill /> Call
-              </a>
-            </div>
           </div>
           <div className="rounded-3xl overflow-hidden border border-borderSubtle shadow-card">
             <iframe
               title="Map"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509597!2d144.9537353153167!3d-37.81720997975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDQ5JzAxLjkiUyAxNDTCsDU3JzE2LjQiRQ!5e0!3m2!1sen!2sin!4v1614642321000!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d982.327065106382!2d73.95684076948244!3d18.53398784950748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c1a9cfd9580f%3A0xd684a10f1aecbcd4!2sMayur%20Auto%20World!5e0!3m2!1sen!2sin!4v1736035960000!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0, minHeight: 360 }}

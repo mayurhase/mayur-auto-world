@@ -21,25 +21,12 @@ export default function ContactPage() {
             <MagneticButton className="w-full rounded-full bg-accent text-primary py-3 font-semibold hover:bg-accentHover transition-colors">
               Submit enquiry
             </MagneticButton>
-            <div className="flex flex-wrap gap-2">
-              <a
-                href="https://wa.me/1234567890"
-                className="flex items-center gap-2 rounded-full border border-borderSubtle px-4 py-2 text-sm font-semibold hover:border-accent transition-colors"
-              >
-                <RiWhatsappFill /> WhatsApp
-              </a>
-              <a
-                href="tel:+911234567890"
-                className="flex items-center gap-2 rounded-full border border-borderSubtle px-4 py-2 text-sm font-semibold hover:border-accent transition-colors"
-              >
-                <RiPhoneFill /> Call
-              </a>
-            </div>
+            
           </div>
           <div className="rounded-3xl overflow-hidden border border-borderSubtle shadow-card">
             <iframe
               title="Map"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509597!2d144.9537353153167!3d-37.81720997975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDQ5JzAxLjkiUyAxNDTCsDU3JzE2LjQiRQ!5e0!3m2!1sen!2sin!4v1614642321000!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d982.327065106382!2d73.95684076948244!3d18.53398784950748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c1a9cfd9580f%3A0xd684a10f1aecbcd4!2sMayur%20Auto%20World!5e0!3m2!1sen!2sin!4v1736035960000!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0, minHeight: 360 }}

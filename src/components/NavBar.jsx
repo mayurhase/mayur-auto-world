@@ -1,5 +1,5 @@
 import React from 'react'
-import { motion, AnimatePresence, color } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { NavLink, useLocation } from 'react-router-dom'
 import { RiPhoneFill } from 'react-icons/ri'
 import MagneticButton from './MagneticButton'
@@ -12,7 +12,13 @@ export default function NavBar({ navLinks, isMenuOpen, setIsMenuOpen }) {
     <div className="sticky top-0 z-40 bg-primary/85 backdrop-blur-xl border-b border-borderSubtle/70 shadow-lg shadow-black/30">
       <header className={`${container} pt-5 pb-4 flex items-center justify-between relative z-10`}>
         <div className="flex items-center gap-3">
-          <p className="text-sm uppercase tracking-[0.24em] text-text"> <span style={color}>Mayur</span> Auto World</p>
+          <NavLink
+            to="/"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="text-base sm:text-lg font-black uppercase tracking-[0.24em] text-text hover:text-accent transition"
+          >
+            <span className="text-[#ff3b30] font-black">Mayur</span> Auto World
+          </NavLink>
         </div>
         <nav className="hidden lg:flex items-center gap-4 text-sm font-semibold text-text-muted">
           {navLinks.map((link) => (
@@ -25,13 +31,18 @@ export default function NavBar({ navLinks, isMenuOpen, setIsMenuOpen }) {
                 }`
               }
               style={{ whiteSpace: 'nowrap' }}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
               {link.label}
             </NavLink>
           ))}
         </nav>
         <div className="hidden lg:flex gap-2">
-          <MagneticButton className="flex items-center gap-2 rounded-full border border-accent bg-accent text-primary px-3.5 py-2 text-sm font-semibold hover:bg-accentHover transition-colors">
+          <MagneticButton
+            type="button"
+            className="flex items-center gap-2 rounded-full border border-accent bg-accent text-primary px-3.5 py-2 text-sm font-semibold hover:bg-accentHover transition-colors"
+            onClick={() => window.open('tel:+918055464465')}
+          >
             <RiPhoneFill /> Call
           </MagneticButton>
         </div>
@@ -79,13 +90,20 @@ export default function NavBar({ navLinks, isMenuOpen, setIsMenuOpen }) {
                       isActive ? 'text-accent' : 'text-text-muted hover:text-accent'
                     }`
                   }
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    setIsMenuOpen(false)
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                  }}
                 >
                   {link.label}
                 </NavLink>
               ))}
               <div className="flex gap-3 pt-2">
-                <MagneticButton className="flex items-center gap-2 rounded-full border border-accent bg-accent text-primary px-4 py-2 text-sm font-semibold hover:bg-accentHover transition-colors">
+                <MagneticButton
+                  type="button"
+                  className="flex items-center gap-2 rounded-full border border-accent bg-accent text-primary px-4 py-2 text-sm font-semibold hover:bg-accentHover transition-colors"
+                  onClick={() => window.open('tel:+918055464465')}
+                >
                   <RiPhoneFill /> Call
                 </MagneticButton>
               </div>

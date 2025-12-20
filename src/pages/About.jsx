@@ -10,7 +10,7 @@ export default function AboutPage() {
         <div className={`${container} grid md:grid-cols-3 gap-4`}>
           <AboutCard
             title="Brand story"
-            text="Started as a two-bay garage in 2012, now a specialist studio trusted by collectors and performance owners."
+            text="Started as a two-bay garage in 2020, now a specialist studio trusted by collectors and performance owners."
           />
           <AboutCard
             title="Founders"

@@ -77,6 +77,10 @@ body {
   min-width: 260px;
 }
 
+.compare-pan-x {
+  touch-action: pan-x;
+}
+
 @keyframes brand-marquee {
   0% {
     transform: translateX(0);

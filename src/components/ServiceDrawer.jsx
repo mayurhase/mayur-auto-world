@@ -47,10 +47,25 @@ export default function ServiceDrawer({ service, onClose }) {
             </div>
           </div>
           <div className="flex gap-3">
-            <MagneticButton className="flex-1 rounded-full border border-accent text-text px-4 py-3 font-semibold hover:bg-accent/10 transition-colors">
-              Book this
+            <MagneticButton
+              type="button"
+              className="flex-1 rounded-full border border-accent text-text px-4 py-3 font-semibold hover:bg-accent/10 transition-colors"
+              onClick={() => {
+                const text = encodeURIComponent(
+                  `Hi Mayur Auto World, I want a quote for ${service.title}. My car: [model]. Preferred date: [date].`,
+                )
+                window.open(`https://wa.me/8055464465?text=${text}`, '_blank')
+              }}
+            >
+              Get Quote
             </MagneticButton>
-            <MagneticButton className="flex-1 rounded-full border border-borderSubtle px-4 py-3 font-semibold hover:border-accent transition-colors">
+            <MagneticButton
+              type="button"
+              className="flex-1 rounded-full border border-borderSubtle px-4 py-3 font-semibold hover:border-accent transition-colors"
+              onClick={() => {
+                window.open('tel:+918055464465')
+              }}
+            >
               Talk to us
             </MagneticButton>
           </div>
