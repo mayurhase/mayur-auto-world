@@ -11,8 +11,8 @@ export default {
           DEFAULT: '#EAEAEA',
           muted: '#9A9A9A',
         },
-        accent: '#F5C518',
-        accentHover: '#FFD84D',
+        accent: '#F3C041',
+        accentHover: '#FFD86A',
         borderSubtle: '#262626',
       },
       fontFamily: {

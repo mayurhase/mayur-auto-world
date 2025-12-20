@@ -35,6 +35,21 @@ body {
     #0b0b0b;
   color: #eaeaea;
   letter-spacing: 0.01em;
+  overflow-x: hidden;
+}
+
+@media (max-width: 640px) {
+  :root {
+    font-size: 15px;
+  }
+  body {
+    background: #0b0b0b;
+  }
+}
+
+:root {
+  --swiper-navigation-size: 26px;
+  --swiper-navigation-sides-offset: 10px;
 }
 
 .grain {
@@ -45,4 +60,28 @@ body {
   opacity: 0.7;
   mix-blend-mode: soft-light;
   z-index: 0;
+}
+
+.brand-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+  width: max-content;
+  animation: brand-marquee 24s linear infinite;
+}
+
+.brand-marquee-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 260px;
+}
+
+@keyframes brand-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
