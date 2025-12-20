@@ -49,6 +49,16 @@ export default function HomePage() {
     []
   );
 
+  const safetySlides = useMemo(
+    () => [
+      { label: "All services", image: "/assets/all-services.jpeg" },
+      { label: "Don’t drink and drive", image: "/assets/dont-drink-drive.jpeg" },
+      { label: "Use seatbelt", image: "/assets/use-seatbelt.jpeg" },
+      { label: "Car cover", image: "/assets/car-cover.jpeg" },
+    ],
+    []
+  );
+
   useEffect(() => {
     const onScroll = () => {
       const scrollable =
@@ -159,6 +169,83 @@ export default function HomePage() {
               <p className="text-text-muted mt-1 text-sm">{item.detail}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className={`${sectionRhythm[1]} border-b border-borderSubtle/60`}>
+        <div className={`${container} relative`}>
+          <div className="flex items-center justify-between gap-3 mb-4">
+            <div>
+              <p className="text-xs uppercase tracking-[0.24em] text-accent">
+                Safety & care
+              </p>
+              <p className="text-lg font-semibold text-text">
+                Essentials we stand by
+              </p>
+            </div>
+            <div className="hidden sm:flex items-center gap-2">
+              <button
+                type="button"
+                className="safety-prev h-9 w-9 rounded-full border border-borderSubtle bg-soft text-text hover:border-accent transition"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                className="safety-next h-9 w-9 rounded-full border border-borderSubtle bg-soft text-text hover:border-accent transition"
+              >
+                ›
+              </button>
+            </div>
+          </div>
+          <div className="relative">
+            <Swiper
+              modules={[Navigation, Autoplay]}
+              navigation={{ prevEl: ".safety-prev", nextEl: ".safety-next" }}
+              autoplay={{ delay: 2800, disableOnInteraction: false }}
+              spaceBetween={16}
+              slidesPerView={1.05}
+              breakpoints={{
+                640: { slidesPerView: 2 },
+                960: { slidesPerView: 2.5 },
+              }}
+              loop
+              className="rounded-2xl"
+            >
+              {safetySlides.map((slide) => (
+                <SwiperSlide key={slide.label}>
+                  <div className="overflow-hidden rounded-2xl border border-borderSubtle/80 bg-soft/70 shadow-card">
+                    <div className="relative w-full overflow-hidden">
+                      <img
+                        src={slide.image}
+                        alt={slide.label}
+                        className="w-full h-auto object-contain block bg-black"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent pointer-events-none" />
+                      <span className="absolute bottom-3 left-3 rounded-full bg-primary/80 px-3 py-1 text-xs uppercase tracking-[0.2em] text-text">
+                        {slide.label}
+                      </span>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            <div className="flex sm:hidden justify-end gap-2 mt-3">
+              <button
+                type="button"
+                className="safety-prev h-9 w-9 rounded-full border border-borderSubtle bg-soft text-text hover:border-accent transition"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                className="safety-next h-9 w-9 rounded-full border border-borderSubtle bg-soft text-text hover:border-accent transition"
+              >
+                ›
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
