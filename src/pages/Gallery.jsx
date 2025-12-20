@@ -3,6 +3,8 @@ import SectionTitle from '../components/SectionTitle'
 import { galleryItems } from '../data/content'
 import { container, sectionRhythm } from '../shared/layout'
 import Lightbox from 'react-image-lightbox'
+import "react-image-lightbox/style.css";
+
 
 export default function GalleryPage() {
   const [galleryFilter, setGalleryFilter] = useState('All')
