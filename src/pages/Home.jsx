@@ -126,7 +126,7 @@ export default function HomePage() {
       </div>
 
       <section
-        className="relative min-h-screen flex items-center pt-16 pb-14 sm:py-20 overflow-hidden"
+        className="relative min-h-screen flex items-center pt-14 pb-12 sm:py-20 overflow-hidden"
         style={{
           backgroundImage:
             "linear-gradient(180deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.68) 40%, rgba(0,0,0,0.4) 100%), url('/assets/hero-bg.jpeg')",
@@ -136,18 +136,19 @@ export default function HomePage() {
           backgroundColor: "#0b0b0b",
         }}
       >
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/70 via-transparent to-black/70" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/55 via-black/30 to-black/70" />
         <div className="relative w-full">
-          <div className={`${container} space-y-4 sm:space-y-6`}>
+          <div className={`${container} space-y-3 sm:space-y-6`}>
             <motion.div
-              initial={isMobile ? false : "hidden"}
+              initial={isMobile ? "show" : "hidden"}
+              animate={isMobile ? "show" : undefined}
               whileInView={isMobile ? undefined : "show"}
               viewport={isMobile ? undefined : { once: true }}
               transition={
                 isMobile ? undefined : { duration: 0.5, ease: "easeOut" }
               }
               variants={fadeIn}
-              className="max-w-2xl space-y-4"
+              className="max-w-2xl space-y-3"
             >
               <p className="text-sm uppercase tracking-[0.28em] text-text-muted">
                 Precision studio
@@ -163,7 +164,8 @@ export default function HomePage() {
               </p>
             </motion.div>
             <motion.div
-              initial={isMobile ? false : "hidden"}
+              initial={isMobile ? "show" : "hidden"}
+              animate={isMobile ? "show" : undefined}
               whileInView={isMobile ? undefined : "show"}
               viewport={isMobile ? undefined : { once: true, amount: 0.2 }}
               transition={
@@ -292,7 +294,8 @@ export default function HomePage() {
             <motion.button
               key={service.title}
               type="button"
-              initial={isMobile ? false : "hidden"}
+              initial={isMobile ? "show" : "hidden"}
+              animate={isMobile ? "show" : undefined}
               whileInView={isMobile ? undefined : "show"}
               viewport={isMobile ? undefined : { once: true, amount: 0.2 }}
               variants={fadeIn}
@@ -542,7 +545,7 @@ export default function HomePage() {
           <div className="rounded-3xl overflow-hidden border border-borderSubtle shadow-card">
             <iframe
               title="Map"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d982.327065106382!2d73.95684076948244!3d18.53398784950748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c1a9cfd9580f%3A0xd684a10f1aecbcd4!2sMayur%20Auto%20World!5e0!3m2!1sen!2sin!4v1736035960000!5m2!1sen!2sin"
+              src="https://www.google.com/maps?q=Mayur%20Auto%20World&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0, minHeight: 360 }}

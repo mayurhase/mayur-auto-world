@@ -37,10 +37,10 @@ export default function App() {
           <Route path="/join" element={<JoinPage />} />
         </Routes>
         <a
-          href="https://wa.me/8055464465?text=Hi%20Mayur%20Auto%20World%2C%20I%27d%20like%20more%20information%20about%20your%20services%20and%20products%20and%20to%20schedule%20an%20appointment."
+          href="https://api.whatsapp.com/send?phone=918055464465&text=Hi%20Mayur%20Auto%20World%2C%20I%27d%20like%20more%20information%20about%20your%20services%20and%20products%20and%20to%20schedule%20an%20appointment."
           target="_blank"
           rel="noreferrer"
-          className="fixed bottom-4 right-4 z-40 inline-flex items-center gap-2 rounded-full border border-accent/80 bg-primary/70 px-4 py-3 text-xs sm:text-sm font-semibold text-accent shadow-[0_14px_44px_rgba(0,0,0,0.35)] backdrop-blur hover:bg-accent/20 hover:text-accent hover:translate-y-[-2px] hover:shadow-[0_20px_60px_rgba(0,0,0,0.45)] transition max-w-[calc(100%-24px)] whitespace-nowrap"
+          className="fixed bottom-4 right-4 z-40 inline-flex items-center gap-2 rounded-full border border-accent/80 bg-primary/75 px-4 py-3 text-xs sm:text-sm font-semibold text-accent shadow-[0_14px_44px_rgba(0,0,0,0.35)] backdrop-blur hover:bg-accent/20 hover:text-accent hover:translate-y-[-2px] hover:shadow-[0_20px_60px_rgba(0,0,0,0.45)] transition max-w-[calc(100%-24px)] whitespace-nowrap"
         >
           <RiWhatsappFill className="text-base sm:text-lg" />
           WhatsApp

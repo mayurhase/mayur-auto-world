@@ -54,7 +54,7 @@ export default function ServiceDrawer({ service, onClose }) {
                 const text = encodeURIComponent(
                   `Hi Mayur Auto World, I want a quote for ${service.title}. My car: [model]. Preferred date: [date].`,
                 )
-                window.open(`https://wa.me/8055464465?text=${text}`, '_blank')
+                window.open(`https://api.whatsapp.com/send?phone=918055464465&text=${text}`, '_blank')
               }}
             >
               Get Quote

@@ -39,6 +39,10 @@ export const homeServices = [
     image: '/assets/denting-and-painting.png',
     inclusions: ['Panel prep + filling', 'Color matching', 'Baked clear coat', 'Insurance-friendly estimates', 'Post-paint polish'],
   },
+]
+
+export const servicesPageServices = [
+  ...homeServices,
   {
     title: 'Full Body Painting',
     desc: 'Complete respray with matched primer, base, and deep clear for a factory reset.',
@@ -46,10 +50,6 @@ export const homeServices = [
     image: '/assets/full-body-painting.jpeg',
     inclusions: ['Surface prep + masking', 'Color-match mixing', 'Primer + base + clear', 'Baked finish', 'Final polish & inspection'],
   },
-]
-
-export const servicesPageServices = [
-  ...homeServices,
   {
     title: 'Car Wash',
     desc: 'Two-bucket wash, foam pre-soak, and microfiber dry.',
