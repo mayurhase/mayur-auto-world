@@ -53,12 +53,12 @@ export default function HomePage() {
 
   const safetySlides = useMemo(
     () => [
-      { label: "All services", image: "/assets/all-services.jpeg" },
-      { label: "Use seatbelt", image: "/assets/use-seatbelt.jpeg" },
-      { label: "Car cover", image: "/assets/car-cover.jpeg" },
+      { label: "Studio exterior", image: "/assets/hero-bg.jpeg" },
+      { label: "Seat covers", image: "/assets/seat-cover.png" },
+      { label: "Graphic coating", image: "/assets/graphic%20coating.jpeg" },
       {
-        label: "Don’t drink and drive",
-        image: "/assets/dont-drink-drive.jpeg",
+        label: "Denting & painting",
+        image: "/assets/denting-and-painting.png",
       },
     ],
     []

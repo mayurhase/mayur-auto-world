@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, useLocation, NavLink } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import HomePage from './pages/Home'
+import SeatsPage from './pages/Seats'
 import ServicesPage from './pages/Services'
 import GalleryPage from './pages/Gallery'
 import AboutPage from './pages/About'
@@ -30,6 +31,7 @@ export default function App() {
         <NavBar navLinks={navLinks} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/seats" element={<SeatsPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/about" element={<AboutPage />} />
