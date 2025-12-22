@@ -1,139 +1,348 @@
-import React from 'react'
+import React, { useMemo, useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
+import ReactCompareImage from 'react-compare-image'
+import { RiArrowRightUpLine, RiWhatsappFill } from 'react-icons/ri'
 import SectionTitle from '../components/SectionTitle'
-import MagneticButton from '../components/MagneticButton'
+import SeatCoverDrawer from '../components/SeatCoverDrawer'
+import { beforeAfter } from '../data/content'
 import { container, sectionRhythm } from '../shared/layout'
 
-const seatHighlights = [
+const materialFilters = ['All', 'Leatherette', 'Nappa', 'Fabric', 'Custom']
+
+const seatProducts = [
   {
-    title: 'Premium seat covers',
-    desc: 'Custom stitch lines, snug factory-fit panels, and airbag-safe stitching.',
+    id: 'leatherette-classic',
+    name: 'Leatherette Classic',
+    material: 'Leatherette',
+    image: '/assets/seat-cover.png',
+    imagePosition: 'center 20%',
+    badges: ['Hand-stitched', 'Airbag-safe', 'Custom fit'],
+    gallery: [
+      { src: '/assets/seat-cover.png', alt: 'Leatherette stitching', position: 'center 18%' },
+      { src: '/assets/seat-cover.png', alt: 'Leatherette texture', position: 'center 40%' },
+      { src: '/assets/seat-cover.png', alt: 'Seat bolsters', position: 'center 65%' },
+    ],
+    materials: ['Leatherette', 'Perforated leatherette'],
+    colors: ['Charcoal', 'Cocoa', 'Sand', 'Black/Red'],
+    compatibility: 'Fits most hatchback, sedan, and SUV seats with airbag-safe seams.',
+    warranty: '2-year stitching + fitment warranty.',
+    care: 'Wipe with a damp microfiber; avoid harsh solvents.',
+    lifestyle: '/assets/seat-cover.png',
   },
   {
-    title: 'Comfort upgrades',
-    desc: 'Breathable materials, ventilated options, and extra lumbar support.',
+    id: 'nappa-luxe',
+    name: 'Nappa Luxe',
+    material: 'Nappa',
+    image: '/assets/seat-cover.png',
+    imagePosition: 'center 30%',
+    badges: ['Soft-touch', 'Airbag-safe', 'Custom fit'],
+    gallery: [
+      { src: '/assets/seat-cover.png', alt: 'Nappa grain', position: 'center 25%' },
+      { src: '/assets/seat-cover.png', alt: 'Nappa stitching', position: 'center 50%' },
+      { src: '/assets/seat-cover.png', alt: 'Seat contours', position: 'center 70%' },
+      { src: '/assets/seat-cover.png', alt: 'Nappa paneling', position: 'center 10%' },
+    ],
+    materials: ['Nappa leatherette', 'Quilted Nappa'],
+    colors: ['Onyx', 'Mocha', 'Pebble', 'Black/Tan'],
+    compatibility: 'Best for sedans and luxury SUVs; compatible with side airbags.',
+    warranty: '3-year material + stitch warranty.',
+    care: 'Use leather-safe cleaner; condition quarterly.',
+    lifestyle: '/assets/seat-cover.png',
   },
   {
-    title: 'Protection first',
-    desc: 'Spill resistance, easy wipe-down surfaces, and UV-safe colors.',
+    id: 'fabric-weave',
+    name: 'Fabric Weave',
+    material: 'Fabric',
+    image: '/assets/seat-cover.png',
+    imagePosition: 'center 15%',
+    badges: ['Breathable', 'Airbag-safe', 'Custom fit'],
+    gallery: [
+      { src: '/assets/seat-cover.png', alt: 'Fabric weave', position: 'center 22%' },
+      { src: '/assets/seat-cover.png', alt: 'Fabric stitching', position: 'center 55%' },
+      { src: '/assets/seat-cover.png', alt: 'Seat panels', position: 'center 72%' },
+    ],
+    materials: ['Fabric weave', 'Mesh insert'],
+    colors: ['Slate', 'Graphite', 'Ash', 'Black/Grey'],
+    compatibility: 'Ideal for daily drivers and taxi fleets; side-airbag safe.',
+    warranty: '18-month fabric + fitment warranty.',
+    care: 'Vacuum regularly and spot clean with mild soap.',
+    lifestyle: '/assets/seat-cover.png',
+  },
+  {
+    id: 'perforated-cool',
+    name: 'Perforated Cool',
+    material: 'Leatherette',
+    image: '/assets/seat-cover.png',
+    imagePosition: 'center 42%',
+    badges: ['Vent-ready', 'Airbag-safe', 'Custom fit'],
+    gallery: [
+      { src: '/assets/seat-cover.png', alt: 'Perforated texture', position: 'center 35%' },
+      { src: '/assets/seat-cover.png', alt: 'Perforated stitching', position: 'center 55%' },
+      { src: '/assets/seat-cover.png', alt: 'Vent panel', position: 'center 72%' },
+    ],
+    materials: ['Perforated leatherette', 'Micro-perf insert'],
+    colors: ['Jet Black', 'Smoke', 'Walnut', 'Black/Beige'],
+    compatibility: 'Works with ventilated seat kits; airbags remain unobstructed.',
+    warranty: '2-year perforation + stitch warranty.',
+    care: 'Blow out perforations; wipe with non-abrasive cloth.',
+    lifestyle: '/assets/seat-cover.png',
+  },
+  {
+    id: 'quilted-sport',
+    name: 'Quilted Sport',
+    material: 'Custom',
+    image: '/assets/seat-cover.png',
+    imagePosition: 'center 55%',
+    badges: ['Quilted', 'Airbag-safe', 'Custom fit'],
+    gallery: [
+      { src: '/assets/seat-cover.png', alt: 'Quilted pattern', position: 'center 48%' },
+      { src: '/assets/seat-cover.png', alt: 'Quilted stitching', position: 'center 70%' },
+      { src: '/assets/seat-cover.png', alt: 'Seat bolsters', position: 'center 20%' },
+    ],
+    materials: ['Quilted leatherette', 'Contrast piping'],
+    colors: ['Black/Red', 'Black/Blue', 'Tan/Chocolate', 'Grey/Black'],
+    compatibility: 'Recommended for sporty trims; side-airbag safe.',
+    warranty: '2-year quilting + fitment warranty.',
+    care: 'Wipe gently; avoid sharp objects on quilted panels.',
+    lifestyle: '/assets/seat-cover.png',
+  },
+  {
+    id: 'two-tone-custom',
+    name: 'Two-Tone Custom',
+    material: 'Custom',
+    image: '/assets/seat-cover.png',
+    imagePosition: 'center 70%',
+    badges: ['Hand-stitched', 'Airbag-safe', 'Custom fit'],
+    gallery: [
+      { src: '/assets/seat-cover.png', alt: 'Two-tone split', position: 'center 62%' },
+      { src: '/assets/seat-cover.png', alt: 'Contrast stitch', position: 'center 40%' },
+      { src: '/assets/seat-cover.png', alt: 'Seat accents', position: 'center 20%' },
+      { src: '/assets/seat-cover.png', alt: 'Two-tone panels', position: 'center 80%' },
+    ],
+    materials: ['Custom palette', 'Embossed logo option'],
+    colors: ['Any OEM match', 'Black/Caramel', 'Ivory/Tan', 'Graphite/Red'],
+    compatibility: 'Built for most vehicles; custom templates for rare models.',
+    warranty: '3-year custom stitch warranty.',
+    care: 'Clean with neutral pH cleaner; protect stitching.',
+    lifestyle: '/assets/seat-cover.png',
   },
 ]
 
-const seatTypes = [
-  { label: 'Leatherette', note: 'Soft-touch finish with easy care.' },
-  { label: 'Genuine leather', note: 'Premium feel and natural grain.' },
-  { label: 'Fabric + mesh', note: 'Cooler feel for everyday use.' },
-  { label: 'Ventilated seat kits', note: 'Cooling airflow for long drives.' },
+const seatSteps = [
+  {
+    title: 'Measure + match',
+    desc: 'We confirm your exact model and layout before cutting.',
+  },
+  {
+    title: 'Tailor + stitch',
+    desc: 'Panels are stitched to factory lines with airbag-safe seams.',
+  },
+  {
+    title: 'Fit + finish',
+    desc: 'Tight fitment, trim re-checks, and a final quality sweep.',
+  },
 ]
 
 export default function SeatsPage() {
+  const [activeMaterial, setActiveMaterial] = useState('All')
+  const [activeProduct, setActiveProduct] = useState(null)
+
+  const filteredProducts = useMemo(() => {
+    if (activeMaterial === 'All') return seatProducts
+    return seatProducts.filter((product) => product.material === activeMaterial)
+  }, [activeMaterial])
+
   return (
-    <main className="bg-surface pb-16">
-      <section className="relative overflow-hidden border-b border-borderSubtle/70 bg-gradient-to-b from-primary via-surface to-soft">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(201,181,156,0.18),transparent_40%)]" />
-        <div className={`${container} grid gap-8 lg:grid-cols-[1.05fr,0.95fr] items-center py-12 sm:py-16 relative`}>
-          <div className="space-y-5">
-            <p className="text-xs uppercase tracking-[0.3em] text-accent">Car seats</p>
-            <h1 className="text-3xl sm:text-5xl font-black leading-tight tracking-wide text-shadow-soft">
-              Premium car seats, in stock and ready to fit
+    <main className="bg-[#070707] pb-20">
+      <section className="relative overflow-hidden border-b border-borderSubtle/70 bg-[#050505]">
+        <div className="absolute inset-0 fabric-texture opacity-70" />
+        <div className={`${container} relative py-12 sm:py-16`}>
+          <div className="space-y-4 max-w-2xl">
+            <p className="text-xs uppercase tracking-[0.3em] text-accent">
+              Seat Covers
+            </p>
+            <h1 className="text-3xl sm:text-5xl font-black tracking-wide">
+              Seat Covers, Tailored to Your Drive
             </h1>
-            <p className="text-text text-base sm:text-lg">
-              We now offer car seats and seat covers with factory-fit precision. Choose your material,
-              color, and stitching, and we will install it cleanly in our studio.
+            <p className="text-text-muted text-base sm:text-lg">
+              Premium materials, stitched to factory lines. Designed to upgrade
+              comfort and protect your interior without looking aftermarket.
             </p>
-            <div className="flex flex-wrap gap-3">
-              <MagneticButton
-                className="rounded-full border border-accent bg-accent text-primary px-5 py-3 font-semibold hover:bg-accentHover transition-colors"
-                onClick={() =>
-                  window.open(
-                    'https://api.whatsapp.com/send?phone=918055464465&text=Hi%20Mayur%20Auto%20World%2C%20I%20want%20car%20seats%20or%20seat%20covers%20for%20my%20car.%20Please%20share%20options.',
-                    '_blank',
-                  )
-                }
-              >
-                Get seat options
-              </MagneticButton>
-              <MagneticButton
-                className="rounded-full border border-borderSubtle text-text px-5 py-3 font-semibold hover:border-accent transition-colors"
-                onClick={() => window.open('tel:+918055464465')}
-              >
-                Talk to us
-              </MagneticButton>
+          </div>
+        </div>
+      </section>
+
+      <section className={`${sectionRhythm[0]} border-b border-borderSubtle/60`}>
+        <div className={`${container} space-y-6`}>
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <p className="text-xs uppercase tracking-[0.26em] text-accent">
+                Material selector
+              </p>
+              <p className="text-lg font-semibold text-text">
+                Choose your base feel
+              </p>
             </div>
-            <div className="flex flex-wrap gap-2 text-xs uppercase tracking-[0.2em] text-text-muted">
-              <span className="rounded-full border border-borderSubtle bg-primary px-3 py-2">OEM fit</span>
-              <span className="rounded-full border border-borderSubtle bg-primary px-3 py-2">Custom stitching</span>
-              <span className="rounded-full border border-borderSubtle bg-primary px-3 py-2">Fast install</span>
+            <div className="flex gap-2 overflow-x-auto pb-2">
+              {materialFilters.map((material) => (
+                <button
+                  key={material}
+                  type="button"
+                  onClick={() => setActiveMaterial(material)}
+                  className={`whitespace-nowrap rounded-full border px-4 py-2 text-xs uppercase tracking-[0.22em] transition ${
+                    activeMaterial === material
+                      ? 'border-accent bg-accent text-primary'
+                      : 'border-borderSubtle text-text-muted hover:text-text hover:border-accent/70'
+                  }`}
+                >
+                  {material}
+                </button>
+              ))}
             </div>
           </div>
-          <div className="relative rounded-3xl overflow-hidden border border-borderSubtle shadow-card bg-soft">
-            <img
-              src="/assets/seat-cover.png"
-              alt="Premium car seats"
-              className="w-full h-full object-cover image-toned"
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {filteredProducts.map((product) => (
+              <div
+                key={product.id}
+                className="rounded-3xl border border-borderSubtle bg-soft/80 shadow-card overflow-hidden flex flex-col"
+              >
+                <div className="relative h-64 overflow-hidden">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="h-full w-full object-cover"
+                    style={{ objectPosition: product.imagePosition }}
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
+              </div>
+              <div className="p-5 space-y-3 flex-1 flex flex-col">
+                <div className="space-y-1">
+                  <p className="text-xs uppercase tracking-[0.22em] text-accent">
+                    {product.material}
+                  </p>
+                  <h3 className="text-xl font-black">{product.name}</h3>
+                </div>
+                  <div className="mt-auto flex flex-wrap gap-3">
+                    <a
+                      href={`https://api.whatsapp.com/send?phone=918055464465&text=${encodeURIComponent(
+                        `Hi Mayur Auto World, I want a quote for ${product.name}. My car: [model]. Preferred color: [color].`,
+                      )}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-xs font-semibold text-primary transition hover:bg-accentHover"
+                    >
+                      Get Quote <RiWhatsappFill />
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => setActiveProduct(product)}
+                      className="inline-flex items-center gap-2 rounded-full border border-borderSubtle px-4 py-2 text-xs font-semibold text-text transition hover:border-accent/70 hover:text-accent"
+                    >
+                      View Details <RiArrowRightUpLine />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <SectionTitle
+        eyebrow="Before / After"
+        title="See the interior upgrade"
+        tone="wide"
+      />
+      <section className={`${sectionRhythm[0]} border-b border-borderSubtle/60`}>
+        <div className={`${container} grid lg:grid-cols-[1.1fr,0.9fr] gap-6 items-center`}>
+          <div className="rounded-3xl border border-borderSubtle bg-soft/70 shadow-card overflow-hidden">
+            <ReactCompareImage
+              leftImage={beforeAfter.before}
+              rightImage={beforeAfter.after}
+              sliderLineColor="#F3C041"
+              handleSize={44}
+              leftImageLabel="Before"
+              rightImageLabel="After"
+              hover={true}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-accent/55 via-accent/15 to-transparent" />
-            <div className="absolute bottom-4 left-4 right-4 rounded-2xl border border-borderSubtle bg-primary/90 px-4 py-3 text-sm text-text">
-              Seats available now. Choose finishes, stitching, and fitment style.
-            </div>
           </div>
-        </div>
-      </section>
-
-      <section className={`${sectionRhythm[1]} bg-surface border-b border-borderSubtle/70`}>
-        <div className={`${container} grid gap-4 md:grid-cols-3`}>
-          {seatHighlights.map((item) => (
-            <div key={item.title} className="rounded-3xl border border-borderSubtle bg-soft p-5 shadow-card">
-              <p className="text-xs uppercase tracking-[0.2em] text-accent">Highlight</p>
-              <h3 className="text-lg font-black mt-2">{item.title}</h3>
-              <p className="text-text-muted mt-2">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <SectionTitle eyebrow="Seat options" title="Pick your material & finish" tone="wide" />
-      <section className={`${sectionRhythm[0]} bg-surface`}>
-        <div className={`${container} grid gap-4 sm:grid-cols-2 lg:grid-cols-4`}>
-          {seatTypes.map((seat) => (
-            <div key={seat.label} className="rounded-2xl border border-borderSubtle bg-primary px-4 py-4">
-              <p className="text-sm font-semibold text-text">{seat.label}</p>
-              <p className="text-xs text-text-muted mt-1">{seat.note}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className={`${sectionRhythm[1]} bg-soft border-t border-borderSubtle/70`}>
-        <div className={`${container} grid gap-6 lg:grid-cols-[1.1fr,0.9fr] items-center`}>
           <div className="space-y-4">
-            <p className="text-xs uppercase tracking-[0.26em] text-accent">Seat care</p>
-            <h2 className="text-2xl sm:text-3xl font-black tracking-wide">
-              Installed with clean lines, kept clean with the right aftercare
-            </h2>
+            <p className="text-xs uppercase tracking-[0.22em] text-accent">
+              Interior impact
+            </p>
+            <h3 className="text-2xl sm:text-3xl font-black">
+              Cleaner lines, richer texture, and a more premium cabin feel.
+            </h3>
             <p className="text-text-muted">
-              We use OEM-safe fitting methods and keep sensors/airbags clear. Ask us about cleaning kits and
-              care schedules for long-lasting comfort.
+              This is the finish you can feel — tight fitment and a factory
+              silhouette with upgraded materials.
             </p>
-          </div>
-          <div className="rounded-3xl border border-borderSubtle bg-primary p-6 shadow-card space-y-3">
-            <p className="text-sm font-semibold text-text">Need a quote fast?</p>
-            <p className="text-text-muted text-sm">
-              Share your car model and preferred material. We will respond with options and pricing.
-            </p>
-            <MagneticButton
-              className="w-full rounded-full bg-accent text-primary py-3 font-semibold hover:bg-accentHover transition-colors"
-              onClick={() =>
-                window.open(
-                  'https://api.whatsapp.com/send?phone=918055464465&text=Hi%20Mayur%20Auto%20World%2C%20please%20share%20seat%20options%20and%20pricing%20for%20my%20car.',
-                  '_blank',
-                )
-              }
-            >
-              WhatsApp seat enquiry
-            </MagneticButton>
           </div>
         </div>
       </section>
+
+      <SectionTitle
+        eyebrow="How we fit it"
+        title="A precise, three-step install"
+        tone="wide"
+      />
+      <section className={`${sectionRhythm[0]} border-b border-borderSubtle/60`}>
+        <div className={`${container} grid gap-4 md:grid-cols-3`}>
+          {seatSteps.map((step, idx) => (
+            <div
+              key={step.title}
+              className="rounded-3xl border border-borderSubtle bg-soft/80 p-5 shadow-card"
+            >
+              <div className="flex items-center gap-3">
+                <span className="h-10 w-10 rounded-full bg-accent text-primary flex items-center justify-center font-black">
+                  {`0${idx + 1}`}
+                </span>
+                <h3 className="text-lg font-black">{step.title}</h3>
+              </div>
+              <p className="text-text-muted mt-3">{step.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className={`${sectionRhythm[1]}`}>
+        <div className={`${container}`}>
+          <div className="rounded-3xl border border-borderSubtle bg-soft/80 p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-card">
+            <div>
+              <p className="text-xs uppercase tracking-[0.22em] text-accent">
+                Need guidance
+              </p>
+              <h3 className="text-xl sm:text-2xl font-black">
+                Not sure which suits your car? Talk to us.
+              </h3>
+              <p className="text-text-muted mt-2">
+                Share your model and interior photos. We will recommend the
+                right fit, finish, and color.
+              </p>
+            </div>
+            <a
+              href="https://api.whatsapp.com/send?phone=918055464465&text=Hi%20Mayur%20Auto%20World%2C%20I%20need%20help%20choosing%20the%20right%20seat%20cover%20for%20my%20car.%20Please%20advise."
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-primary transition hover:bg-accentHover"
+            >
+              Talk to us <RiWhatsappFill />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <AnimatePresence>
+        {activeProduct && (
+          <SeatCoverDrawer
+            product={activeProduct}
+            onClose={() => setActiveProduct(null)}
+            key={activeProduct.id}
+          />
+        )}
+      </AnimatePresence>
     </main>
   )
 }

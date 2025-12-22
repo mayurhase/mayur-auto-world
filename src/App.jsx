@@ -26,7 +26,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <div className="relative min-h-screen bg-primary text-text">
+      <div className="relative min-h-[100svh] bg-primary text-text">
         <div className="grain" />
         <NavBar navLinks={navLinks} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
         <Routes>

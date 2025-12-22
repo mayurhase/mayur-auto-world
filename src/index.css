@@ -32,6 +32,7 @@
 body {
   margin: 0;
   min-height: 100vh;
+  min-height: 100svh;
   background: radial-gradient(circle at 20% 20%, rgba(255, 216, 77, 0.08), transparent 30%),
     radial-gradient(circle at 80% 0%, rgba(245, 197, 24, 0.08), transparent 28%),
     #0b0b0b;
@@ -39,6 +40,12 @@ body {
   letter-spacing: 0.01em;
   overflow-x: hidden;
   font-weight: 500;
+}
+
+@supports (min-height: 100dvh) {
+  body {
+    min-height: 100dvh;
+  }
 }
 
 @media (max-width: 640px) {
@@ -65,19 +72,47 @@ body {
   z-index: 0;
 }
 
-.brand-marquee-track {
-  display: flex;
-  align-items: center;
-  gap: 2.25rem;
-  width: max-content;
-  animation: brand-marquee 24s linear infinite;
+.brand-marquee-logo {
+  height: 96px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.4));
 }
 
-.brand-marquee-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 260px;
+.brand-float {
+  animation: brand-float 2s ease-in-out infinite;
+  transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease;
+  will-change: transform;
+}
+
+.brand-float:hover,
+.brand-float:active {
+  transform: translateY(-4px) scale(1.02);
+  background-color: rgba(11, 11, 11, 0.7);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.seat-stitch {
+  height: 2px;
+  width: 100%;
+  border-radius: 999px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(243, 192, 65, 0.9) 0 8px,
+    rgba(243, 192, 65, 0) 8px 16px
+  );
+  animation: stitch-slide 6s linear infinite;
+}
+
+.fabric-texture {
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.06), transparent 35%),
+    radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.04), transparent 45%),
+    repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.025) 0 1px,
+      rgba(0, 0, 0, 0) 1px 6px
+    );
 }
 
 .compare-pan-x {
@@ -103,11 +138,32 @@ body {
   animation: pulse-slow 2.2s ease-in-out infinite;
 }
 
-@keyframes brand-marquee {
+@keyframes brand-float {
   0% {
-    transform: translateX(0);
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-6px) translateX(4px);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateY(0) translateX(0);
+  }
+}
+
+@keyframes stitch-slide {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 160px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-float {
+    animation: none;
+  }
+  .seat-stitch {
+    animation: none;
   }
 }

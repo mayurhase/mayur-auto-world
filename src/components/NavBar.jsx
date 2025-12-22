@@ -26,9 +26,13 @@ export default function NavBar({ navLinks, isMenuOpen, setIsMenuOpen }) {
               key={link.label}
               to={link.path}
               className={({ isActive }) =>
-                `transition-colors px-2.5 py-1.5 rounded-full text-sm ${
-                  isActive ? 'text-accent bg-soft/60 border border-borderSubtle' : 'hover:text-accent'
-                }`
+                link.label === 'Seat Covers'
+                  ? `px-3.5 py-1.5 rounded-full text-sm font-semibold border border-accent/70 text-accent transition transform hover:-translate-y-0.5 hover:bg-accent/90 hover:text-primary hover:shadow-[0_16px_40px_rgba(243,192,65,0.35)] active:translate-y-0 ${
+                      isActive ? 'bg-accent/90 text-primary shadow-[0_12px_30px_rgba(243,192,65,0.4)]' : 'bg-transparent'
+                    }`
+                  : `transition-colors px-2.5 py-1.5 rounded-full text-sm ${
+                      isActive ? 'text-accent bg-soft/60 border border-borderSubtle' : 'hover:text-accent'
+                    }`
               }
               style={{ whiteSpace: 'nowrap' }}
               onClick={() => {
@@ -90,9 +94,15 @@ export default function NavBar({ navLinks, isMenuOpen, setIsMenuOpen }) {
                   key={link.label}
                   to={link.path}
                   className={({ isActive }) =>
-                    `block text-sm uppercase tracking-[0.2em] transition-colors ${
-                      isActive ? 'text-accent' : 'text-text-muted hover:text-accent'
-                    }`
+                    link.label === 'Seat Covers'
+                      ? `inline-flex w-fit items-center rounded-full border border-accent/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-accent transition ${
+                          isActive
+                            ? 'bg-accent/90 text-primary shadow-[0_10px_30px_rgba(243,192,65,0.4)]'
+                            : 'bg-transparent hover:bg-accent/90 hover:text-primary'
+                        }`
+                      : `block text-sm uppercase tracking-[0.2em] transition-colors ${
+                          isActive ? 'text-accent' : 'text-text-muted hover:text-accent'
+                        }`
                   }
                   onClick={() => {
                     setIsMenuOpen(false)

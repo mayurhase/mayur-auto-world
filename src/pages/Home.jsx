@@ -2,6 +2,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { NavLink } from "react-router-dom";
 import ReactCompareImage from "react-compare-image";
 import {
   RiStarSmileFill,
@@ -9,6 +10,7 @@ import {
   RiPhoneFill,
   RiCheckFill,
   RiArrowDownSLine,
+  RiArrowRightUpLine,
 } from "react-icons/ri";
 import SectionTitle from "../components/SectionTitle";
 import MagneticButton from "../components/MagneticButton";
@@ -126,7 +128,7 @@ export default function HomePage() {
       </div>
 
       <section
-        className="relative min-h-screen flex items-center pt-14 pb-12 sm:py-20 overflow-hidden"
+        className="relative min-h-[100svh] flex items-center pt-14 pb-12 sm:py-20 overflow-hidden"
         style={{
           backgroundImage:
             "linear-gradient(180deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.68) 40%, rgba(0,0,0,0.4) 100%), url('/assets/hero-bg.jpeg')",
@@ -192,6 +194,45 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className={`${sectionRhythm[1]}`}>
+        <div className={`${container} space-y-6`}>
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-xs uppercase tracking-[0.24em] text-accent">
+                Trusted brands
+              </p>
+              <p className="text-lg font-semibold text-text">
+                Products we install every day
+              </p>
+            </div>
+            <div className="rounded-full bg-soft/50 px-4 py-2 text-xs uppercase tracking-[0.2em] text-text-muted">
+              OEM-grade materials only
+            </div>
+          </div>
+          <div className="relative py-6">
+            <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10">
+              {movingBrands.map((brand, idx) => (
+                <div
+                  key={brand.name}
+                  className="brand-float flex items-center gap-4 rounded-full bg-primary/65 px-7 py-4 shadow-card"
+                  style={{ animationDelay: `${idx * 0.35}s` }}
+                >
+                  <img
+                    src={brand.src}
+                    alt={brand.name}
+                    className="brand-marquee-logo"
+                    loading="lazy"
+                  />
+                  <span className="text-xs uppercase tracking-[0.2em] text-text-muted">
+                    {brand.name}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section
         className={`${sectionRhythm[1]} border-b border-borderSubtle/60`}
       >
@@ -205,6 +246,97 @@ export default function HomePage() {
               <p className="text-text-muted mt-1 text-sm">{item.detail}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      <SectionTitle
+        eyebrow="Seat Covers"
+        title="Tailored comfort with factory-fit finish"
+        tone="wide"
+      />
+      <section className={`${sectionRhythm[0]}`}>
+        <div
+          className={`${container} grid lg:grid-cols-[1.05fr,0.95fr] gap-6 items-center`}
+        >
+          <motion.div
+            initial={isMobile ? "show" : "hidden"}
+            animate={isMobile ? "show" : undefined}
+            whileInView={isMobile ? undefined : "show"}
+            viewport={isMobile ? undefined : { once: true, amount: 0.3 }}
+            variants={fadeIn}
+            className="relative overflow-hidden rounded-3xl border border-borderSubtle bg-soft/70 shadow-card"
+          >
+            <img
+              src="/assets/seat-cover.png"
+              alt="Premium seat covers"
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+            <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center gap-2">
+              <span className="rounded-full bg-primary/80 px-3 py-1 text-xs uppercase tracking-[0.22em] text-text">
+                Custom fit
+              </span>
+              <span className="rounded-full bg-accent/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+                Covers + seat kits
+              </span>
+            </div>
+          </motion.div>
+          <motion.div
+            initial={isMobile ? "show" : "hidden"}
+            animate={isMobile ? "show" : undefined}
+            whileInView={isMobile ? undefined : "show"}
+            viewport={isMobile ? undefined : { once: true, amount: 0.3 }}
+            variants={fadeIn}
+            className="space-y-5"
+          >
+            <div className="space-y-3">
+              <p className="text-sm uppercase tracking-[0.26em] text-accent">
+                Seat cover studio
+              </p>
+              <h3 className="text-2xl sm:text-3xl font-black">
+                Stitched to match your interior, not just fit it.
+              </h3>
+              <div className="seat-stitch" />
+              <p className="text-text-muted text-base">
+                Choose perforation, quilting, and color-matched piping. We keep
+                airbags safe and lines clean, with a tailored finish that feels
+                OEM.
+              </p>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-3 text-sm text-text-muted">
+              {[
+                "Factory-fit patterns per model",
+                "Premium leatherette or fabric",
+                "Ventilated cut-outs supported",
+                "Same-day fitment options",
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="flex items-start gap-3 rounded-2xl bg-soft/70 px-4 py-3"
+                >
+                  <span className="mt-1 h-2 w-2 rounded-full bg-accent" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <NavLink
+                to="/seats"
+                className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-primary transition hover:bg-accentHover"
+              >
+                Explore seat covers <RiArrowRightUpLine />
+              </NavLink>
+              <a
+                href="https://api.whatsapp.com/send?phone=918055464465&text=Hi%20Mayur%20Auto%20World%2C%20I%20want%20car%20seats%20or%20seat%20covers%20for%20my%20car.%20Please%20share%20options."
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-borderSubtle bg-soft/70 px-5 py-3 text-sm font-semibold text-text transition hover:border-accent/70 hover:text-accent"
+              >
+                WhatsApp seat options <RiWhatsappFill />
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
 
