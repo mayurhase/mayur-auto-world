@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useMemo, useState } from "react";
+﻿import React, { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
@@ -32,7 +32,8 @@ export default function HomePage() {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [galleryFilter, setGalleryFilter] = useState("All");
   const [selectedService, setSelectedService] = useState(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const progressRef = useRef(null);
+  const rafRef = useRef(null);
   const [openFaqs, setOpenFaqs] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -56,7 +57,7 @@ export default function HomePage() {
   const safetySlides = useMemo(
     () => [
       { label: "Studio exterior", image: "/assets/hero-bg.jpeg" },
-      { label: "Seat covers", image: "/assets/seat-cover.png" },
+      { label: "Body cover", image: "/assets/car-cover.jpeg" },
       { label: "Graphic coating", image: "/assets/graphic%20coating.jpeg" },
       {
         label: "Denting & painting",
@@ -67,21 +68,35 @@ export default function HomePage() {
   );
 
   useEffect(() => {
-    const onScroll = () => {
+    const updateProgress = () => {
       const scrollable =
         document.documentElement.scrollHeight - window.innerHeight;
       const scrolled = window.scrollY;
-      setScrollProgress(Math.min(100, (scrolled / scrollable) * 100));
+      const next =
+        scrollable > 0 ? Math.min(100, (scrolled / scrollable) * 100) : 0;
+      if (progressRef.current) {
+        progressRef.current.style.width = `${next}%`;
+      }
+      rafRef.current = null;
+    };
+    const onScroll = () => {
+      if (rafRef.current) return;
+      rafRef.current = window.requestAnimationFrame(updateProgress);
     };
     const onResize = () => {
       setIsMobile(window.innerWidth < 640);
+      updateProgress();
     };
     onResize();
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
+      if (rafRef.current) {
+        window.cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
     };
   }, []);
 
@@ -121,10 +136,7 @@ export default function HomePage() {
   return (
     <>
       <div className="fixed top-0 left-0 right-0 h-0.5 bg-borderSubtle z-30">
-        <div
-          className="h-full bg-accent"
-          style={{ width: `${scrollProgress}%` }}
-        />
+        <div ref={progressRef} className="h-full bg-accent" />
       </div>
 
       <section
@@ -250,8 +262,8 @@ export default function HomePage() {
       </section>
 
       <SectionTitle
-        eyebrow="Seat Covers"
-        title="Tailored comfort with factory-fit finish"
+        eyebrow="Body Cover"
+        title="Protection when your car is parked"
         tone="wide"
       />
       <section className={`${sectionRhythm[0]}`}>
@@ -267,18 +279,18 @@ export default function HomePage() {
             className="relative overflow-hidden rounded-3xl border border-borderSubtle bg-soft/70 shadow-card"
           >
             <img
-              src="/assets/seat-cover.png"
-              alt="Premium seat covers"
+              src="/assets/car-cover.jpeg"
+              alt="Premium body cover"
               className="h-full w-full object-cover"
               loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
             <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center gap-2">
               <span className="rounded-full bg-primary/80 px-3 py-1 text-xs uppercase tracking-[0.22em] text-text">
-                Custom fit
+                Outdoor-ready
               </span>
               <span className="rounded-full bg-accent/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-                Covers + seat kits
+                Custom sizing
               </span>
             </div>
           </motion.div>
@@ -292,24 +304,22 @@ export default function HomePage() {
           >
             <div className="space-y-3">
               <p className="text-sm uppercase tracking-[0.26em] text-accent">
-                Seat cover studio
+                Body cover studio
               </p>
               <h3 className="text-2xl sm:text-3xl font-black">
-                Stitched to match your interior, not just fit it.
+                Secure protection with a clean, tailored fit.
               </h3>
-              <div className="seat-stitch" />
               <p className="text-text-muted text-base">
-                Choose perforation, quilting, and color-matched piping. We keep
-                airbags safe and lines clean, with a tailored finish that feels
-                OEM.
+                A premium cover that shields paint, resists dust, and stays in
+                place. Sized to your car with a soft inner lining.
               </p>
             </div>
             <div className="grid sm:grid-cols-2 gap-3 text-sm text-text-muted">
               {[
-                "Factory-fit patterns per model",
-                "Premium leatherette or fabric",
-                "Ventilated cut-outs supported",
-                "Same-day fitment options",
+                "Paint-safe inner lining",
+                "Breathable fabric build",
+                "UV + dust resistance",
+                "Elastic hem with buckle",
               ].map((item) => (
                 <div
                   key={item}
@@ -322,18 +332,18 @@ export default function HomePage() {
             </div>
             <div className="flex flex-wrap items-center gap-3">
               <NavLink
-                to="/seats"
+                to="/body-cover"
                 className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-primary transition hover:bg-accentHover"
               >
-                Explore seat covers <RiArrowRightUpLine />
+                Explore body cover <RiArrowRightUpLine />
               </NavLink>
               <a
-                href="https://api.whatsapp.com/send?phone=918055464465&text=Hi%20Mayur%20Auto%20World%2C%20I%20want%20car%20seats%20or%20seat%20covers%20for%20my%20car.%20Please%20share%20options."
+                href="https://api.whatsapp.com/send?phone=918055464465&text=Hi%20Mayur%20Auto%20World%2C%20I%20want%20a%20body%20cover%20for%20my%20car.%20Please%20share%20sizes%20and%20pricing."
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-borderSubtle bg-soft/70 px-5 py-3 text-sm font-semibold text-text transition hover:border-accent/70 hover:text-accent"
               >
-                WhatsApp seat options <RiWhatsappFill />
+                WhatsApp body cover <RiWhatsappFill />
               </a>
             </div>
           </motion.div>

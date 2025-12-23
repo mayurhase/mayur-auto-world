@@ -26,11 +26,11 @@ export const homeServices = [
     inclusions: ['Multi-year ceramic', 'Graphic-safe prep', 'Glass + wheels coat', 'UV + chemical resistance', 'Aftercare kit'],
   },
   {
-    title: 'Premium Seat Cover',
-    desc: 'Tailored seat covers with contrast stitching and factory fit.',
+    title: 'Body Cover',
+    desc: 'Breathable, paint-safe covers for indoor/outdoor storage.',
     icon: <RiSparkling2Fill className="text-text" />,
-    image: '/assets/seat-cover.png',
-    inclusions: ['Custom patterns', 'Contrast stitching', 'Perforation/vent cut-outs', 'Airbag-safe panels', 'Fast turnaround'],
+    image: '/assets/car-cover.jpeg',
+    inclusions: ['Custom sizing', 'Soft liner', 'UV + dust protection', 'Tie-downs', 'Logo placement'],
   },
   {
     title: 'Body Shop Denting & Painting',
@@ -56,13 +56,6 @@ export const servicesPageServices = [
     icon: <RiCarFill className="text-text" />,
     image: '/assets/car-wash.jpeg',
     inclusions: ['pH-balanced shampoo', 'Wheel + tire clean', 'Microfiber dry', 'Streak-free glass', 'Quick interior tidy'],
-  },
-  {
-    title: 'Car Body Cover',
-    desc: 'Breathable, paint-safe covers for indoor/outdoor storage.',
-    icon: <RiShieldStarFill className="text-text" />,
-    image: '/assets/car-cover-service.jpeg',
-    inclusions: ['Custom sizing', 'Soft liner', 'UV + dust protection', 'Tie-downs', 'Logo placement'],
   },
   {
     title: 'Mats',
@@ -179,7 +172,7 @@ export const faqs = [
 export const social = [
   { platform: 'Instagram', handle: '@mayur_autoworld', icon: <RiInstagramFill />, link: 'https://www.instagram.com/mayur_autoworld' },
   { platform: 'YouTube', handle: 'Build diaries & walkthroughs', icon: <RiYoutubeFill />, link: 'https://youtube.com/@mayurautoworld' },
-  { platform: 'Facebook', handle: 'Connect on Facebook', icon: <RiInstagramFill />, link: 'https://www.facebook.com' },
+  { platform: 'Facebook', handle: 'Connect on Facebook', icon: <RiInstagramFill />, link: 'https://www.facebook.com/share/1BacWgQEg8/?mibextid=wwXIfr' },
 ]
 
 export const beforeAfter = {
@@ -189,7 +182,7 @@ export const beforeAfter = {
 
 export const navLinks = [
   { label: 'Home', path: '/' },
-  { label: 'Seat Covers', path: '/seats' },
+  { label: 'Body Cover', path: '/body-cover' },
   { label: 'Services', path: '/services' },
   { label: 'Gallery', path: '/gallery' },
   { label: 'About Us', path: '/about' },

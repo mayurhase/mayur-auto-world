@@ -9,7 +9,7 @@ export default function NavBar({ navLinks, isMenuOpen, setIsMenuOpen }) {
   const { pathname } = useLocation()
 
   return (
-    <div className="sticky top-0 z-40 bg-primary/85 backdrop-blur-xl border-b border-borderSubtle/70 shadow-lg shadow-black/30">
+    <div className="sticky top-0 z-40 relative bg-primary/85 backdrop-blur-xl border-b border-borderSubtle/70 shadow-lg shadow-black/30">
       <header className={`${container} pt-5 pb-4 flex items-center justify-between relative z-10`}>
         <div className="flex items-center gap-3">
           <NavLink
@@ -26,9 +26,11 @@ export default function NavBar({ navLinks, isMenuOpen, setIsMenuOpen }) {
               key={link.label}
               to={link.path}
               className={({ isActive }) =>
-                link.label === 'Seat Covers'
-                  ? `px-3.5 py-1.5 rounded-full text-sm font-semibold border border-accent/70 text-accent transition transform hover:-translate-y-0.5 hover:bg-accent/90 hover:text-primary hover:shadow-[0_16px_40px_rgba(243,192,65,0.35)] active:translate-y-0 ${
-                      isActive ? 'bg-accent/90 text-primary shadow-[0_12px_30px_rgba(243,192,65,0.4)]' : 'bg-transparent'
+                link.label === 'Body Cover'
+                  ? `group relative inline-flex items-center gap-2 px-2.5 py-1.5 text-sm font-semibold transition ${
+                      isActive ? 'text-accent' : 'text-text-muted hover:text-accent'
+                    } after:content-[''] after:absolute after:left-2 after:right-2 after:-bottom-0.5 after:h-px after:bg-accent/0 after:transition after:duration-300 ${
+                      isActive ? 'after:bg-accent/70' : 'group-hover:after:bg-accent/70'
                     }`
                   : `transition-colors px-2.5 py-1.5 rounded-full text-sm ${
                       isActive ? 'text-accent bg-soft/60 border border-borderSubtle' : 'hover:text-accent'
@@ -41,6 +43,9 @@ export default function NavBar({ navLinks, isMenuOpen, setIsMenuOpen }) {
                 }
               }}
             >
+              {link.label === 'Body Cover' && (
+                <span className="h-1.5 w-1.5 rounded-full bg-accent/70" />
+              )}
               {link.label}
             </NavLink>
           ))}
@@ -86,7 +91,7 @@ export default function NavBar({ navLinks, isMenuOpen, setIsMenuOpen }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.98 }}
             transition={{ duration: 0.18, ease: 'easeOut' }}
-            className="lg:hidden border-t border-borderSubtle bg-primary/95 backdrop-blur-sm"
+            className="lg:hidden absolute left-0 right-0 top-full border-t border-borderSubtle bg-primary/95 backdrop-blur-sm shadow-xl"
           >
             <div className={`${container} py-4 flex flex-col gap-4`}>
               {navLinks.map((link) => (
@@ -94,11 +99,9 @@ export default function NavBar({ navLinks, isMenuOpen, setIsMenuOpen }) {
                   key={link.label}
                   to={link.path}
                   className={({ isActive }) =>
-                    link.label === 'Seat Covers'
-                      ? `inline-flex w-fit items-center rounded-full border border-accent/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-accent transition ${
-                          isActive
-                            ? 'bg-accent/90 text-primary shadow-[0_10px_30px_rgba(243,192,65,0.4)]'
-                            : 'bg-transparent hover:bg-accent/90 hover:text-primary'
+                    link.label === 'Body Cover'
+                      ? `inline-flex w-fit items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] transition ${
+                          isActive ? 'text-accent' : 'text-text-muted hover:text-accent'
                         }`
                       : `block text-sm uppercase tracking-[0.2em] transition-colors ${
                           isActive ? 'text-accent' : 'text-text-muted hover:text-accent'
@@ -111,6 +114,9 @@ export default function NavBar({ navLinks, isMenuOpen, setIsMenuOpen }) {
                     }
                   }}
                 >
+                  {link.label === 'Body Cover' && (
+                    <span className="h-1.5 w-1.5 rounded-full bg-accent/70" />
+                  )}
                   {link.label}
                 </NavLink>
               ))}
