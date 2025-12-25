@@ -623,6 +623,84 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
+.studio-hotspot {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #f3c041;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.studio-hotspot:hover {
+  transform: scale(1.05);
+  border-color: rgba(243, 192, 65, 0.7);
+}
+
+.studio-hotspot-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #f3c041;
+  box-shadow: 0 0 0 6px rgba(243, 192, 65, 0.15);
+}
+
+.studio-hotspot-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(14px, -50%);
+  min-width: 200px;
+  max-width: 240px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(8, 8, 8, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #eaeaea;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.studio-hotspot-card.is-active {
+  opacity: 1;
+  transform: translate(16px, -50%);
+}
+
+.studio-hotspot-title {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #f3c041;
+  margin-bottom: 4px;
+}
+
+.studio-hotspot-text {
+  display: block;
+  font-size: 12px;
+  color: #c8c8c8;
+}
+
+@media (max-width: 640px) {
+  .studio-hotspot {
+    width: 26px;
+    height: 26px;
+  }
+
+  .studio-hotspot-card {
+    min-width: 170px;
+    max-width: 210px;
+    font-size: 12px;
+  }
+}
+
 .compare-wrap {
   position: relative;
   width: 100%;
