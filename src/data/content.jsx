@@ -26,7 +26,7 @@ export const homeServices = [
     inclusions: ['Multi-year ceramic', 'Graphic-safe prep', 'Glass + wheels coat', 'UV + chemical resistance', 'Aftercare kit'],
   },
   {
-    title: 'Body Cover',
+    title: 'Car Cover',
     desc: 'Breathable, paint-safe covers for indoor/outdoor storage.',
     icon: <RiSparkling2Fill className="text-text" />,
     image: '/assets/car-cover-service.jpeg',
@@ -159,7 +159,7 @@ export const beforeAfter = {
 
 export const navLinks = [
   { label: 'Home', path: '/' },
-  { label: 'Body Cover', path: '/body-cover' },
+  { label: 'Car Cover', path: '/body-cover' },
   { label: 'Services', path: '/services' },
   { label: 'Gallery', path: '/gallery' },
   { label: 'About Us', path: '/about' },

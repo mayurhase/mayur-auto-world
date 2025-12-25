@@ -623,6 +623,143 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: box-shadow 0.25s ease;
+}
+
+.cover-parallax {
+  will-change: transform;
+  transition: transform 0.2s ease-out;
+}
+
+.sheen-once {
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(110deg, transparent 0%, rgba(255, 255, 255, 0.08) 45%, transparent 60%);
+  transform: translateX(-120%);
+  animation: sheen-sweep 1.4s ease-out 0.3s 1 forwards;
+  pointer-events: none;
+}
+
+.cover-bleed {
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.cover-hotspot {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  z-index: 1;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.cover-hotspot:hover,
+.cover-hotspot:focus-within {
+  transform: scale(1.06);
+  border-color: rgba(243, 192, 65, 0.7);
+  z-index: 2;
+}
+
+.cover-hotspot.is-active {
+  z-index: 3;
+}
+
+.cover-hotspot-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #f3c041;
+  box-shadow: 0 0 0 6px rgba(243, 192, 65, 0.18);
+}
+
+.cover-hotspot-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(14px, -50%);
+  min-width: 220px;
+  max-width: 260px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(8, 8, 8, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #eaeaea;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.cover-hotspot-card.is-active {
+  opacity: 1;
+  transform: translate(16px, -50%);
+}
+
+@media (max-width: 640px) {
+  .cover-hotspot {
+    width: 24px;
+    height: 24px;
+  }
+
+  .cover-hotspot-card {
+    min-width: 200px;
+    max-width: 220px;
+  }
+
+  .cover-hotspot:not(.cover-hotspot-left):not(.cover-hotspot-down) .cover-hotspot-card {
+    left: 50%;
+    right: auto;
+    top: 50%;
+    transform: translate(14px, -50%);
+  }
+
+  .cover-hotspot:not(.cover-hotspot-left):not(.cover-hotspot-down) .cover-hotspot-card.is-active {
+    transform: translate(16px, -50%);
+  }
+
+  .cover-hotspot-left .cover-hotspot-card {
+    left: auto;
+    right: 50%;
+    transform: translate(-14px, -50%);
+  }
+
+  .cover-hotspot-left .cover-hotspot-card.is-active {
+    transform: translate(-16px, -50%);
+  }
+
+  .cover-hotspot-down .cover-hotspot-card {
+    left: 50%;
+    top: 100%;
+    transform: translate(-50%, 14px);
+  }
+
+  .cover-hotspot-down .cover-hotspot-card.is-active {
+    transform: translate(-50%, 16px);
+  }
+
+}
+
+@keyframes sheen-sweep {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
 
 .compare-wrap {
   position: relative;

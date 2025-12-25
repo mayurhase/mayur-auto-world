@@ -221,7 +221,7 @@ export default function HomePage() {
 
 
 <SectionTitle
-        eyebrow="Body Cover"
+        eyebrow="Car Cover"
         title="Protection when your car is parked"
         tone="wide"
       />
@@ -239,7 +239,7 @@ export default function HomePage() {
           >
             <img
               src="/assets/car-cover-service.jpeg"
-              alt="Premium body cover"
+              alt="Premium car cover"
               className="h-full w-full object-cover"
               loading="lazy"
             />
@@ -263,7 +263,7 @@ export default function HomePage() {
           >
             <div className="space-y-3">
               <p className="text-sm uppercase tracking-[0.26em] text-accent">
-                Body cover studio
+                Car cover studio
               </p>
               <h3 className="text-2xl sm:text-3xl font-black">
                 Secure protection with a clean, tailored fit.
@@ -294,15 +294,15 @@ export default function HomePage() {
                 to="/body-cover"
                 className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-primary transition hover:bg-accentHover"
               >
-                Explore body cover <RiArrowRightUpLine />
+                Explore car cover <RiArrowRightUpLine />
               </NavLink>
               <a
-                href="https://api.whatsapp.com/send?phone=919404984040&text=Hi%20Mayur%20Auto%20World%2C%20I%20want%20a%20body%20cover%20for%20my%20car.%20Please%20share%20sizes%20and%20pricing."
+                href="https://api.whatsapp.com/send?phone=919404984040&text=Hi%20Mayur%20Auto%20World%2C%20I%20want%20a%20car%20cover%20for%20my%20car.%20Please%20share%20sizes%20and%20pricing."
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-borderSubtle bg-soft/70 px-5 py-3 text-sm font-semibold text-text transition hover:border-accent/70 hover:text-accent"
               >
-                WhatsApp body cover <RiWhatsappFill />
+                WhatsApp car cover <RiWhatsappFill />
               </a>
             </div>
           </motion.div>
