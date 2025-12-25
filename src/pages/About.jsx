@@ -5,7 +5,6 @@ import MagneticButton from "../components/MagneticButton";
 
 export default function AboutPage() {
   const [isNoteOpen, setIsNoteOpen] = useState(false);
-  const [activeHotspot, setActiveHotspot] = useState(null);
 
   useEffect(() => {
     if (!isNoteOpen) return;
@@ -101,7 +100,7 @@ export default function AboutPage() {
         <div className={`${container} space-y-6`}>
           <SectionTitle
             eyebrow="Studio"
-            title="Where the work happens"
+            title="Interior craft, live"
             tone="wide"
           />
           <div className="relative overflow-hidden rounded-3xl border border-borderSubtle shadow-card">
@@ -111,45 +110,6 @@ export default function AboutPage() {
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
-            {[
-              {
-                id: "interiors",
-                label: "Interiors",
-                text: "We build interiors that make every drive feel better.",
-                style:
-                  "left-1/2 top-[70%] -translate-x-1/2 sm:left-[22%] sm:top-[62%] sm:translate-x-0",
-              },
-              {
-                id: "comfort",
-                label: "Comfort",
-                text: "We build comfort, style, and protection inside your car.",
-                style:
-                  "left-1/2 top-[38%] -translate-x-1/2 sm:left-[64%] sm:top-[30%] sm:translate-x-0",
-              },
-            ].map((spot) => {
-              const isActive = activeHotspot === spot.id;
-              return (
-                <button
-                  key={spot.id}
-                  type="button"
-                  className={`studio-hotspot ${spot.style}`}
-                  onClick={() =>
-                    setActiveHotspot(isActive ? null : spot.id)
-                  }
-                  onMouseEnter={() => setActiveHotspot(spot.id)}
-                  onMouseLeave={() =>
-                    setActiveHotspot((prev) => (prev === spot.id ? null : prev))
-                  }
-                  aria-label={spot.label}
-                >
-                  <span className="studio-hotspot-dot" />
-                  <span className={`studio-hotspot-card ${isActive ? "is-active" : ""}`}>
-                    <span className="studio-hotspot-title">{spot.label}</span>
-                    <span className="studio-hotspot-text">{spot.text}</span>
-                  </span>
-                </button>
-              );
-            })}
           </div>
         </div>
       </section>
