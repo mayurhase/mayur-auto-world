@@ -11,12 +11,10 @@ import {
   RiCheckFill,
   RiArrowDownSLine,
   RiArrowRightUpLine,
-  RiInstagramFill,
 } from "react-icons/ri";
 import SectionTitle from "../components/SectionTitle";
 import MagneticButton from "../components/MagneticButton";
 import ServiceDrawer from "../components/ServiceDrawer";
-import InstagramEmbed from "../components/InstagramEmbed";
 import { homeServices, trustBar, social } from "../data/content";
 import { container, sectionRhythm } from "../shared/layout";
 import { fadeIn, inputClass } from "../shared/constants";
@@ -422,32 +420,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="pb-16">
-        <div className={`${container}`}>
-          <div className="w-full rounded-3xl border border-borderSubtle/70 bg-gradient-to-r from-[#0b0b0b] via-[#111111] to-[#0c0c0c] px-6 py-6 sm:px-8 sm:py-8 space-y-5">
-            <div className="inline-flex items-center gap-2 text-text-muted text-sm">
-              <RiInstagramFill className="text-accent" />
-              <span className="uppercase tracking-[0.22em] text-xs">From our Instagram</span>
-            </div>
-            <div className="flex justify-center">
-              <div className="videos-scroll reels-scroll flex gap-4 overflow-x-auto pb-2 sm:grid sm:overflow-visible sm:grid-cols-2 lg:grid-cols-3 w-full">
-                {[
-                  "https://www.instagram.com/reel/DQ_S-W_kiuY/?igsh=MmdxM2xqa3Vub2tu",
-                  "https://www.instagram.com/reel/DSTwgOxEj1t/?igsh=MW5wN2hhYXFtdjZuYQ==",
-                  "https://www.instagram.com/reel/DSUowHTCAwC/?igsh=eXJnaHQwa2Z6MW5o",
-                ].map((permalink) => (
-                  <div
-                    key={permalink}
-                    className="insta-embed-tile snap-start w-[70vw] max-w-[320px] flex-shrink-0 sm:w-auto sm:max-w-none"
-                  >
-                    <InstagramEmbed permalink={permalink} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 <SectionTitle
         eyebrow="Contact"
         title="Book a slot or say hello"
