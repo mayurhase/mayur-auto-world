@@ -21,8 +21,15 @@ export default function NavBar({ navLinks, isMenuOpen, setIsMenuOpen }) {
           <NavLink
             to="/"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="text-base sm:text-lg font-black uppercase tracking-[0.24em] text-text hover:text-accent transition"
+            className="inline-flex items-center gap-3 text-base sm:text-lg font-black uppercase tracking-[0.24em] text-text hover:text-accent transition"
           >
+            <span className="flex h-9 w-9 items-center justify-center rounded-full border border-borderSubtle/70 bg-primary/80 shadow-card">
+              <img
+                src="/assets/tab-logo.PNG"
+                alt="Mayur Auto World logo"
+                className="h-6 w-6 object-contain"
+              />
+            </span>
             <span className="text-[#ff3b30] font-black">Mayur</span> Auto World
           </NavLink>
         </div>
