@@ -34,9 +34,9 @@ export default function SeatCoverPage() {
         title="Trusted by us for consistent fit and finish"
         tone="wide"
       />
-      <section className={`${sectionRhythm[0]}`}>
+      <section className={`${sectionRhythm[0]} bg-[#000000]`}>
         <div className={`${container} space-y-6`}>
-          <div className="w-full border-y border-borderSubtle/60 bg-[#000000] py-6">
+          <div className="w-full bg-[#000000] py-6">
             <div className={`${container} grid gap-6 md:grid-cols-[0.6fr,1fr] items-center`}>
               <div className="w-full max-w-xs sm:max-w-sm">
                 <img

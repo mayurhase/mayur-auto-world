@@ -87,14 +87,6 @@ export default function HomePage() {
         label: "Car Accessories & Fitment",
         icon: <RiStarSmileFill className="text-text" />,
       },
-      {
-        label: "Genuine Products",
-        icon: <RiStarSmileFill className="text-text" />,
-      },
-      {
-        label: "Expert Support",
-        icon: <RiStarSmileFill className="text-text" />,
-      },
     ],
     []
   );
@@ -180,10 +172,10 @@ export default function HomePage() {
       </section>
 
       <section
-        className={`${sectionRhythm[0]} border-b border-borderSubtle/60`}
+        className={`${sectionRhythm[0]} border-b border-borderSubtle/60 bg-[#000000]`}
       >
-        <div className={`${container} space-y-4`}>
-          <div>
+          <div className={`${container} space-y-4`}>
+          <div className="space-y-3">
             <p className="text-xs uppercase tracking-[0.24em] text-accent">
               Trusted partner
             </p>
@@ -191,7 +183,7 @@ export default function HomePage() {
               Autoform seat covers, selected for precise fit and finish
             </p>
           </div>
-          <div className="w-full border-y border-borderSubtle/60 bg-[#000000] py-6">
+          <div className="w-full bg-[#000000] py-6">
             <div
               className={`${container} grid gap-14 md:grid-cols-[0.6fr,1fr] items-center`}
             >
@@ -213,6 +205,14 @@ export default function HomePage() {
                     <p>{line}</p>
                   </div>
                 ))}
+                <div className="pt-6">
+                  <NavLink
+                    to="/seat-cover"
+                    className="inline-flex items-center gap-2 rounded-full bg-yellow-400/90 px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-yellow-300"
+                  >
+                    Explore seat covers <RiArrowRightUpLine />
+                  </NavLink>
+                </div>
               </div>
             </div>
           </div>
