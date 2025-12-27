@@ -84,21 +84,14 @@ export default function AboutPage() {
                   </p>
                 </div>
                 <p className="text-text-muted leading-relaxed">
-                  Mayur Pawar is the founder of Mayur Auto World with 6+ years
-                  of hands-on experience in professional car care. He holds
-                  multiple industry certifications and follows proper, approved
-                  methods for every service. Along with detailing and protection
-                  services, he specializes in car seat covers, car body covers,
-                  and genuine auto accessories, ensuring correct fitment and
-                  quality installation. His focus is simple: no shortcuts, clean
-                  work, and reliable results.
+                  Mayur Auto World, founded by Mayur Pawar, with 6+ years of hands-on experience in car care. We have multiple certifications and follow the right and approved methods for every service.
+
+We work on car detailing, paint protection, seat covers, car body covers, and genuine accessories, making sure everything fits properly and is installed correctly. Our focus is simple: no shortcuts, clean work, and dependable results
                 </p>
                 <p className="text-text-muted leading-relaxed">
-                  What We Specialize In We specialize in customized Autoform
-                  seat covers, car interior makeovers, and professional car
-                  detailing. Our work follows a simple and effective formula:
-                  Clean → Restore → Protect This approach helps maintain your
-                  car’s appearance, comfort, and long-term value.
+                  We specialize in custom Autoform seat covers, car interior makeovers, and professional car detailing. Our work follows a clear process:
+Clean → Restore → Protect
+This helps keep your car looking good, comfortable, and protected for a long time.
                 </p>
                 <MagneticButton
                   className="rounded-full border border-accent text-text px-6 py-2.5 font-semibold hover:bg-accent/10 transition-colors"
